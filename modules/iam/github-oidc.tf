@@ -46,7 +46,8 @@ resource "aws_iam_role_policy" "ecr_policy" {
         Sid = "IAM"
         Action = [
           "iam:PassRole",
-          "iam:CreateServiceLinkedRole"
+          "iam:CreateServiceLinkedRole",
+          "iam:Get*",
         ]
         Effect   = "Allow"
         Resource = "*"
