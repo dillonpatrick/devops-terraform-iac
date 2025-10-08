@@ -2,6 +2,6 @@ module "iam" {
   source = "./modules/iam"
 }
 
-module "ecr" {
-  source = "./modules/ecr"
-}
+# module "ecr" {
+#   source = "./modules/ecr"
+# }
