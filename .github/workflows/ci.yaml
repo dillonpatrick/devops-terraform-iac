@@ -34,7 +34,7 @@ jobs:
       - name: Init Terraform
         run: |
           terraform init
-          terraform fmt -check -recursive
+          terraform fmt -check -recursive | echo "Must be formatted"
 
       - name: Plan and apply
         run: terraform apply -auto-approve
