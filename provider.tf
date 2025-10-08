@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "nsinfotech-terraform-remote-state"
-    key = "nsinfotech.tfstate"
+    key    = "nsinfotech.tfstate"
     region = "us-east-2"
   }
 }
