@@ -7,10 +7,11 @@ on:
 permissions:
   id-token: write
   contents: read
+  pull-requests: write
 
 jobs:
   deploy:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, 'apply')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     name: Terraform apply
     runs-on: ubuntu-latest
 
