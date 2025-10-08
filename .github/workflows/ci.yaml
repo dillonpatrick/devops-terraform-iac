@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18]
+        terraform_version: [1.13.3]
 
     steps:
       - uses: actions/checkout@v4
@@ -19,13 +19,18 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.13.3"
-      
+          terraform_version: ${{ matrix.terraform_version }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.GH_ACTIONS_ROLE }}
+          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+
       - name: Init Terraform
         run: |
           terraform init
           terraform fmt -check -recursive
-      
+
       - name: Plan and apply
         run: terraform apply -auto-approve
-
