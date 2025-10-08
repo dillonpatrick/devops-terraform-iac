@@ -74,6 +74,14 @@ resource "aws_iam_role_policy" "ecr_policy" {
         Effect   = "Allow"
         Resource = "*"
       },
+      {
+        Sid = "S3"
+        Action = [
+          "s3:*"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
     ]
   })
 }
