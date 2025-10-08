@@ -8,7 +8,7 @@ terraform {
   backend "s3" {
     bucket = "nsinfotech-terraform-remote-state"
     key    = "nsinfotech.tfstate"
-    region = "us-east-2"  
+    region = "us-east-2"
   }
 }
 
@@ -18,6 +18,6 @@ provider "aws" {
   default_tags {
     tags = {
       IAC = true
-     }
+    }
   }
 }

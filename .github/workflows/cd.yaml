@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
+    name: Terraform apply
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        terraform_version: [1.13.3]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ matrix.terraform_version }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.GH_ACTIONS_ROLE }}
+          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+
+      - name: Run terraform apply command
+        run: terraform apply -auto-approve

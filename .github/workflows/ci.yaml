@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    name: Build and push
+    name: Init and plan terraform
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,6 +36,3 @@ jobs:
           terraform init
           set -e
           terraform fmt -check -recursive || { echo "Terraform formatting check failed"; exit 1; }
-
-      - name: Plan and apply
-        run: terraform apply -auto-approve
