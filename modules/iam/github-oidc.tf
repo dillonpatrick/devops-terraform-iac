@@ -48,7 +48,8 @@ resource "aws_iam_role_policy" "ecr_policy" {
           "iam:PassRole",
           "iam:CreateServiceLinkedRole",
           "iam:Get*",
-          "iam:List*"
+          "iam:List*",
+          "iam:Create*"
         ]
         Effect   = "Allow"
         Resource = "*"
@@ -56,14 +57,7 @@ resource "aws_iam_role_policy" "ecr_policy" {
       {
         Sid = "ECR"
         Action = [
-          "ecr:GetDownloadUrlForLayer",
-          "ecr:BatchGetImage",
-          "ecr:BatchCheckLayerAvailability",
-          "ecr:PutImage",
-          "ecr:InitiateLayerUpload",
-          "ecr:UploadLayerPart",
-          "ecr:CompleteLayerUpload",
-          "ecr:GetAuthorizationToken",
+          "ecr:*",
         ]
         Effect   = "Allow"
         Resource = "*"
