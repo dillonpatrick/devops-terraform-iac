@@ -48,6 +48,7 @@ resource "aws_iam_role_policy" "ecr_policy" {
           "iam:PassRole",
           "iam:CreateServiceLinkedRole",
           "iam:Get*",
+          "iam:List*"
         ]
         Effect   = "Allow"
         Resource = "*"
