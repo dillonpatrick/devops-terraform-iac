@@ -5,6 +5,11 @@ terraform {
       version = "6.15.0"
     }
   }
+  backend "s3" {
+    bucket = "nsinfotech-terraform-remote-state"
+    key = "nsinfotech.tfstate"
+    region = "us-east-2"
+  }
 }
 
 
