@@ -32,4 +32,6 @@ jobs:
           aws-region: ${{ vars.AWS_DEFAULT_REGION }}
 
       - name: Run terraform apply command
-        run: terraform plan
+        run: |
+          terraform init
+          terraform plan
