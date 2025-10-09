@@ -1,6 +1,8 @@
 name: CD
 
-on: issue_comment
+on:
+  issue_comment:
+    types: [created]
 
 permissions:
   id-token: write
@@ -9,7 +11,7 @@ permissions:
 
 jobs:
   deploy:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, 'deploy')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, 'apply')
     name: Terraform apply
     runs-on: ubuntu-latest
 
