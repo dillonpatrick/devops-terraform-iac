@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Terraform
+      - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ matrix.terraform_version }}
@@ -28,9 +28,10 @@ jobs:
           role-to-assume: ${{ vars.GH_ACTIONS_ROLE }}
           aws-region: ${{ vars.AWS_DEFAULT_REGION }}
 
-      - name: Init Terraform
+      - name: Run terraform commands
         run: |
           terraform init
           set -e
           terraform fmt -check -recursive || { echo "::error::Terraform formatting check failed, run 'terraform fmt -recursive' to fix it"; exit 1; }
           terraform plan
+          echo ${{ github.action_status }}
