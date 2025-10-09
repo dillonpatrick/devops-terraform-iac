@@ -33,3 +33,4 @@ jobs:
           terraform init
           set -e
           terraform fmt -check -recursive || { echo "::error::Terraform formatting check failed, run 'terraform fmt -recursive' to fix it"; exit 1; }
+          terraform plan
