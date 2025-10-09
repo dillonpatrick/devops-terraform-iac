@@ -1,8 +1,6 @@
 name: CD
 
-on:
-  issue_comment:
-    types: [created]
+on: issue_comment
 
 permissions:
   id-token: write
@@ -11,7 +9,7 @@ permissions:
 
 jobs:
   deploy:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, 'deploy')
     name: Terraform apply
     runs-on: ubuntu-latest
 
@@ -34,4 +32,6 @@ jobs:
           aws-region: ${{ vars.AWS_DEFAULT_REGION }}
 
       - name: Run terraform apply command
-        run: terraform apply -auto-approve
+        run: |
+          terraform init
+          terraform plan
